@@ -1,0 +1,10 @@
+[{
+    "name": "TM-CMS Web Site",
+    "url": "http://modules.tomanage.fr/templates/cms.package"
+}, {
+    "name": "TM-Eshop Demo",
+    "url": "https://modules.totaljs.com/templates/eshop.package"
+}, {
+    "name": "TM-Blog Engine",
+    "url": "https://modules.totaljs.com/templates/blog.package"
+}]

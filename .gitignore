@@ -1,0 +1,17 @@
+nbproject
+node_modules/
+default.properties
+config
+.settings/
+.buildpath
+.project
+.tern-project
+.DS_Store
+.texlipse
+npm-debug.log
+.c9/
+tmp/
+/logs
+logs.txt
+*.sublime-project
+*.sublime-workspace
