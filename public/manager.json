@@ -1,4 +1,7 @@
 [{
+    "name": "TM-CRM CRM/ERP ToManage",
+    "git": "https://github.com/ToManage/TM-CRM_ERP.git"
+},{
     "name": "TM-CMS Web Site",
     "url": "http://modules.tomanage.fr/templates/cms.package"
 }, {
