@@ -490,7 +490,10 @@ productSchema.virtual('eshopIsNew')
 productSchema.virtual('color') // Get default color in attributs
         .get(function () {
             var color = {};
-
+    
+            if(!this.attributes)
+                return null;
+                
             for(var i=0, len=this.attributes.length;i<len;i++) {
                 if(this.attributes[i].css) {
                     color = this.attributes[i];
