@@ -155,7 +155,11 @@ var productSchema = new Schema({
             key: {type: String},
             value: {type: String},
             css: {type: String}
-        }]
+        }],
+    pack :[{
+            id:{type: Schema.Types.ObjectId, ref:'product'},
+            qty:{type: Number, default: 0}
+    }]
 }, {
     toObject: {virtuals: true},
     toJSON: {virtuals: true}
@@ -485,6 +489,19 @@ productSchema.virtual('eshopIsNew')
                 return true;
 
             return false;
+        });
+        
+productSchema.virtual('total_pack') // Set Total price for a pack
+        .get(function () {
+            var total = 0;
+            if(!this.pack || !this.pack.length)
+                return 0;
+            
+            for(var i=0, len=this.pack.length;i<len;i++) {
+                total += this.pack[i].qty * this.pack[i].id.prices.pu_ht;
+            }
+
+            return total;
         });
         
 productSchema.virtual('color') // Get default color in attributs
