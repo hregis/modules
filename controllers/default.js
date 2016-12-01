@@ -41,6 +41,7 @@ function zipcodeImport() {
 
     var ZipCodeModel = MODEL('zipCode').Schema;
     var csv = require('csv');
+    var fixedWidthString = require('fixed-width-string');
 
     var self = this;
 
@@ -76,6 +77,11 @@ function zipcodeImport() {
                         for (var i = 0; i < row.length; i++) {
                             if (tab[i] === "false")
                                 continue;
+                            
+                            if (tab[i] == 'code') {
+                                obj[tab[i]] = fixedWidthString(row[i], 5, {padding: '0', align: 'right'});
+                                continue;
+                            }
 
                             if (row[i])
                                 obj[tab[i]] = row[i];
@@ -85,7 +91,7 @@ function zipcodeImport() {
                     };
 
                     convertRow(tab, row, index, function (data) {
-                        ZipCodeModel.update({country: 'FR', code: data.code}, {$set: data}, {upsert: true, multi: true}, callback);
+                        ZipCodeModel.update({country: 'FR', insee: data.insee}, {$set: data}, {upsert: true, multi: true}, callback);
                     });
                 })
                 .on("end", function (count) {
