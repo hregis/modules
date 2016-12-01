@@ -149,6 +149,8 @@ var productSchema = new Schema({
         rack: Number, // column
         floor: Number // etage
     },
+    manualBarCode : {type : Boolean, default:false},
+    barCode : String,
     suppliers: [supplierPriceSchema],
     optional: Schema.Types.Mixed,
     linker: {type: String, unique: true, set: setLink}, // SEO URL
@@ -416,7 +418,7 @@ productSchema.pre('save', function (next) {
         this.linker = this.ref.replace(/ /g, "-").toLowerCase();
     else
         this.linker = this.linker.replace(/ /g, "-");
-
+    
     if (this.isNew || !this.seq) {
         if (!this.body)
             this.body = this.description;
@@ -429,6 +431,21 @@ productSchema.pre('save', function (next) {
         next();
 });
 
+productSchema.pre('init', function (next, data) {
+    // Automatic BarCode
+    if(data.manualBarCode)
+        return next();
+    
+    data.barCode = "";
+
+    if (data.caFamily)
+        data.barCode += data.caFamily.substr(0, 2);
+
+    data.barCode += data.seq;
+
+    next();
+});
+
 var dict = {};
 Dict.dict({dictName: ['fk_product_status', 'fk_units'], object: true}, function (err, doc) {
     if (err) {
@@ -437,19 +454,6 @@ Dict.dict({dictName: ['fk_product_status', 'fk_units'], object: true}, function 
     }
     dict = doc;
 });
-
-// Dynamic barCode
-productSchema.virtual('barCode')
-        .get(function () {
-            var barCode = "";
-
-            if (this.caFamily)
-                barCode += this.caFamily.substr(0, 2);
-
-            barCode += this.seq;
-
-            return barCode;
-        });
 
 productSchema.virtual('zone')
         .get(function () {
