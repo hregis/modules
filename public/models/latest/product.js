@@ -419,31 +419,35 @@ productSchema.pre('save', function (next) {
     else
         this.linker = this.linker.replace(/ /g, "-");
     
+    if(this.autoBarCode == true && this.seq) {
+        this.barCode = "";
+
+        if (this.caFamily)
+            this.barCode += this.caFamily.substr(0, 2);
+
+        this.barCode += this.seq;
+    }
+    
     if (this.isNew || !this.seq) {
         if (!this.body)
             this.body = this.description;
 
         SeqModel.incNumber("P", 7, function (seq) {
             self.seq = seq;
+            
+            if(self.autoBarCode == true) {
+                self.barCode = "";
+
+                if (self.caFamily)
+                    self.barCode += self.caFamily.substr(0, 2);
+
+                self.barCode += seq;
+            }
+            
             next();
         });
     } else
         next();
-});
-
-productSchema.pre('init', function (next, data) {
-    // Automatic BarCode
-    if(data.autoBarCode == false)
-        return next();
-    
-    data.barCode = "";
-
-    if (data.caFamily)
-        data.barCode += data.caFamily.substr(0, 2);
-
-    data.barCode += data.seq;
-
-    next();
 });
 
 var dict = {};
