@@ -12,11 +12,11 @@ function view_homepage() {
 function zipcode() {
     var self = this;
     var ZipCodeModel = MODEL('zipCode').Schema;
-
-    if (this.body.q === null)
+    console.log(this.query);
+    if (this.query.q === null)
         return self.json([]);
 
-    var val = "^" + this.body.q;
+    var val = "^" + this.query.q;
 
     var query = {"$or": [
             {code: new RegExp(val, "i")},
