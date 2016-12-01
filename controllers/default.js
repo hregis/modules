@@ -12,9 +12,10 @@ function view_homepage() {
 function zipcode() {
     var self = this;
     var ZipCodeModel = MODEL('zipCode').Schema;
+    var callback = self.query.callback || 'myCallback';
     console.log(this.query);
     if (this.query.q === null)
-        return self.json([]);
+        return self.jsonp(callback, []);
 
     var val = "^" + this.query.q;
 
@@ -30,7 +31,7 @@ function zipcode() {
         if (err)
             return self.throw500(err);
 
-        return self.json(doc);
+        return self.jsonp(callback, doc);
 
     });
 }
