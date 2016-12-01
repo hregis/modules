@@ -57,6 +57,7 @@ var supplierPriceSchema = new Schema({
     ref: String,
     tva_tx: Number,
     minQty: Number,
+    replenishmentTime : {type: Number, default: 0}, // delai de reappro en jr
     prices: {
         pu_ht: {type: Number, default: 0}, // For base price
         pricesQty: {type: Schema.Types.Mixed} // For quantity price reduction
