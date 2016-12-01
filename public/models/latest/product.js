@@ -89,7 +89,6 @@ var productSchema = new Schema({
     description: {type: String, default: ""},
     body: {type: String, default: ""}, // Description For SEO
     notePrivate: {type: String},
-    //barCode: String, //Virtual
     type: {type: String, default: 'PRODUCT'},
     Status: String,
     enabled: {type: Boolean, default: true},
@@ -151,6 +150,7 @@ var productSchema = new Schema({
     },
     manualBarCode : {type : Boolean, default:false},
     barCode : String,
+    aclCode : String,
     suppliers: [supplierPriceSchema],
     optional: Schema.Types.Mixed,
     linker: {type: String, unique: true, set: setLink}, // SEO URL
