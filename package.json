@@ -1,0 +1,30 @@
+{
+  "name": "TM-Modules",
+  "version": "0.1.0",
+  "private": true,
+  "author": {
+    "name": "TM - ToManage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ToManage/modules.git"
+  },
+  "engines": {
+    "node": "4.4.x"
+  },
+  "contributors": [
+    "Herve Prot <herve.prot@tomanage.fr>"
+  ],
+  "license": "OSL v3",
+  "main": "./release.js",
+  "dependencies": {
+    "async": ">= 0.2.9",
+    "csv": "0.3.6",
+    "lodash": "latest",
+    "mongoose": "~4.7",
+    "node-gyp": "^3.4.0",
+    "total.js": "2.2.x"
+  },
+  "devDependencies": {
+  }
+}

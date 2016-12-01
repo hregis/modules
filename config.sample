@@ -1,0 +1,4 @@
+name                     : TM-modules
+version                  : 0.1.0
+author                   : ToManage
+database                 : mongodb://127.0.0.1/modules
