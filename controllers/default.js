@@ -1,6 +1,7 @@
 exports.install = function () {
     F.route('/', view_homepage);
     F.route('/api/zipcode/autocomplete', zipcode);
+    F.route('/api/zipcode/import', zipcodeImport, ['upload'], 1240);
 };
 
 function view_homepage() {
@@ -34,4 +35,69 @@ function zipcode() {
         return self.jsonp(callback, doc);
 
     });
+}
+
+function zipcodeImport() {
+
+    var ZipCodeModel = MODEL('zipCode').Schema;
+    var csv = require('csv');
+
+    var self = this;
+
+    if (self.query.key != CONFIG('zipcode_key'))
+        return self.throw401("Error key");
+
+
+    if (self.files.length > 0) {
+        //console.log(self.files[0].filename);
+
+        var tab = [];
+
+        csv()
+                .from.path(self.files[0].path, {
+                    delimiter: ';',
+                    escape: '"'
+                })
+                .transform(function (row, index, callback) {
+                    if (index === 0) {
+                        tab = row; // Save header line
+                        return callback();
+                    }
+                    //console.log(tab);
+                    //console.log(row);
+
+                    //console.log(row[0]);
+
+                    //return;
+
+                    var convertRow = function (tab, row, index, cb) {
+                        var obj = {};
+
+                        for (var i = 0; i < row.length; i++) {
+                            if (tab[i] === "false")
+                                continue;
+
+                            if (row[i])
+                                obj[tab[i]] = row[i];
+                        }
+
+                        cb(obj);
+                    };
+
+                    convertRow(tab, row, index, function (data) {
+                        ZipCodeModel.update({country: 'FR', code: data.code}, {$set: data}, {upsert: true, multi: true}, callback);
+                    });
+                })
+                .on("end", function (count) {
+                    console.log('Number of lines: ' + count);
+                    return self.json({
+                        count: count
+                    });
+                })
+                .on('error', function (error) {
+                    console.log(error.message);
+                });
+    }
+    else
+        self.plain('Error no file');
 }

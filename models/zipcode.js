@@ -22,3 +22,4 @@ var ZipCodeSchema = new Schema({
 
 exports.Schema = mongoose.model('zipCode', ZipCodeSchema, 'ZipCode');
 exports.name = 'zipCode';
+
