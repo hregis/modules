@@ -148,7 +148,7 @@ var productSchema = new Schema({
         rack: Number, // column
         floor: Number // etage
     },
-    manualBarCode : {type : Boolean, default:false},
+    autoBarCode : {type : Boolean, default:true},
     barCode : String,
     aclCode : String,
     suppliers: [supplierPriceSchema],
