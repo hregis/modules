@@ -433,7 +433,7 @@ productSchema.pre('save', function (next) {
 
 productSchema.pre('init', function (next, data) {
     // Automatic BarCode
-    if(!data.autoBarCode)
+    if(data.autoBarCode == false)
         return next();
     
     data.barCode = "";
