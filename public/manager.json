@@ -4,7 +4,7 @@
     "mongoDB":true
 },{
     "name": "TM-CMS Web Site",
-    "url": "http://modules.tomanage.fr/templates/cms.package"
+    "url": "https://modules.tomanage.fr/templates/cms.package"
 }, {
     "name": "TM-Eshop Demo",
     "url": "https://modules.totaljs.com/templates/eshop.package"
