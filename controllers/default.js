@@ -13,10 +13,10 @@ function zipcode() {
     var self = this;
     var ZipCodeModel = MODEL('zipCode').Schema;
 
-    if (this.body.val === null)
+    if (this.body.q === null)
         return self.json([]);
 
-    var val = "^" + this.body.val;
+    var val = "^" + this.body.q;
 
     var query = {"$or": [
             {code: new RegExp(val, "i")},
