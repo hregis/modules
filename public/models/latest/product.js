@@ -149,8 +149,8 @@ var productSchema = new Schema({
         floor: Number // etage
     },
     autoBarCode : {type : Boolean, default:true},
-    barCode : String,
-    aclCode : String,
+    barCode : {type : String, index: true, uppercase: true, sparse: true},
+    aclCode : {type : String, uppercase: true},
     suppliers: [supplierPriceSchema],
     optional: Schema.Types.Mixed,
     linker: {type: String, unique: true, set: setLink}, // SEO URL
