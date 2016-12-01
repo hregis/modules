@@ -14,7 +14,6 @@ function zipcode() {
     var self = this;
     var ZipCodeModel = MODEL('zipCode').Schema;
     var callback = self.query.callback || 'myCallback';
-    console.log(this.query);
     if (this.query.q === null)
         return self.jsonp(callback, []);
 
@@ -28,7 +27,7 @@ function zipcode() {
 
     //var query = {$or: [{"code" : {$regex: /val.*/ }}, {"city" : { $regex: val, $options: 'i'}}]};
 
-    ZipCodeModel.find(query, {}, {limit: 5}, function (err, doc) {
+    ZipCodeModel.find(query, {}, {limit: 15, sort:{city:1}}, function (err, doc) {
         if (err)
             return self.throw500(err);
 
