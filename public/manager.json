@@ -1,5 +1,6 @@
 [{
-    "name": "Applications"
+    "name": "Applications",
+    "group": "start"
 },{
     "name": "TM-CRM CRM/ERP ToManage (Git)",
     "url": "https://github.com/ToManage/TM-CRM_ERP.git",
@@ -13,8 +14,15 @@
 }, {
     "name": "TM-Blog Engine",
     "url": "https://modules.totaljs.com/templates/blog.package"
+}, {
+    "group": "end"
+}, {
+    "name": "Modules",
+    "group": "start"
 },{
     "name": "Offer module for ToManage (Git)",
     "url": "https://github.com/ToManage/offer.git",
-    "module": true 
+    "module": true
+}, {
+    "group": "end"
 }]
