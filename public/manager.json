@@ -1,4 +1,6 @@
 [{
+    "name": "Applications"
+},{
     "name": "TM-CRM CRM/ERP ToManage (Git)",
     "url": "https://github.com/ToManage/TM-CRM_ERP.git",
     "mongoDB": true
