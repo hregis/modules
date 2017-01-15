@@ -17,7 +17,7 @@
 }, {
     "group": "end"
 }, {
-    "name": "Modules",
+    "name": "Modules CRM/ERP",
     "group": "start"
 },{
     "name": "Company module for ToManage (Git)",
@@ -64,5 +64,15 @@
     "url": "https://github.com/ToManage/bill_supplier.git",
     "module": true
 }, {
+    "group": "end"
+},{
+    "name": "Modules CMS",
+    "group": "start"
+},{
+    "name": "Canvas theme (Git)",
+    "url": "git@bitbucket.org:tomanage/tm-cms_canvas_theme.git",
+    "module": true
+},
+ {
     "group": "end"
 }]
